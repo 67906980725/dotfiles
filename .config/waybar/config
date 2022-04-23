@@ -1,0 +1,68 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 20,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["tray", "pulseaudio", "network", "temperature", "cpu", "memory", "battery", "clock", "custom/germany", "custom/japan"],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-click": true,
+    },
+    "tray": {
+        "spacing": 10,
+    },
+    "clock": {
+	"format-alt": "{:%b%d日 %A %R}"
+    },
+    "cpu": {
+        "format": " {usage}"
+    },
+    "memory": {
+        "format": " {}"
+    },
+    "temperature": {
+        "critical-threshold": 75,
+        "format": " {temperatureC}°C"
+    },
+    "battery": {
+        "bat": "BAT0",
+        "full-at": 95,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "interface": "wlan0",
+	"format": "{bandwidthDownBits}",
+        "format-wifi-bak": " {essid}",
+        "format-wifi": " 嗖",
+        "format-disconnected": "⚠ "
+    },
+    "pulseaudio": {
+        "format": "{icon}{volume}{format_source}",
+        "format-muted": " {format_source}",
+        "format-icons": {
+            "headphones": "3",
+            "default": ["1", "2"]
+        },
+	"format-bluetooth": "{icon}{volume}{format_source}",
+	"format-bluetooth-muted": "{icon} {format_source}",
+	"format-source-bak": "{volume}",
+        "format-source-muted": "",
+	"format-icons": {
+	            "headphone": "",
+	            "hands-free": "",
+	            "headset": "",
+	            "phone": "",
+	            "portable": "",
+	            "car": "",
+	            "default": ["♪", "♫", "♫"]
+	        },
+        "on-click": "pavucontrol"
+    }
+}
