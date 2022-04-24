@@ -25,7 +25,7 @@ install_pkg() {
 
 
 if [ ${system_type} = "Linux" ]; then
-    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution 
+    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance kitty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl
 
     oh_my_zsh_installer="$shell_home/install_oh_my_zsh.sh"
     chmod +x $oh_my_zsh_installer
