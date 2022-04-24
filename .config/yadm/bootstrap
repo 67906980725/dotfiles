@@ -1,0 +1,37 @@
+#!/bin/sh
+
+shell_home="$HOME/shell"
+
+system_type=$(uname -s)
+
+is_command() {
+    command -v "$1" > /dev/null 2>&1
+}
+
+install_pkg() {
+    for one_pkg in $*
+    do
+	if ! is_command "$one_pkg"; then
+        echo "Installing $one_pkg..."
+        sudo pacman -S "$one_pkg"
+        if [ $? -eq 0 ]; then
+            echo "$one_pkg are installed."
+        else
+            echo "Install $one_pkg error."
+        fi
+    fi
+    done
+}
+
+
+if [ ${system_type} = "Linux" ]; then
+    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution 
+
+    oh_my_zsh_installer="$shell_home/install_oh_my_zsh.sh"
+    chmod +x $oh_my_zsh_installer
+    sh $oh_my_zsh_installer
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+fi
+
+
