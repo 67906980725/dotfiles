@@ -2,31 +2,61 @@
 
 shell_home="$HOME/shell"
 
+declare -A cmd_dict
+cmd_dict=( [neovim]='nvim' [fcitx5-im]='fcitx5' [fcitx5-chinese-addons]='fcitx5' [fcitx5-rime]='fcitx5' [fcitx5-qt]='fcitx5' [fcitx5-gtk]='fcitx5' )
+
 system_type=$(uname -s)
 
 is_command() {
-    command -v "$1" > /dev/null 2>&1
+    cmd=$1
+    if [ -n "${cmd_dict[$cmd]}" ];then
+        cmd="${cmd_dict[$cmd]}" 
+    fi
+    installed=1
+    if [ -z "$(command -v $cmd)" ];then
+	installed=0
+    fi
+    return $installed
 }
 
 install_pkg() {
     for one_pkg in $*
     do
-	if ! is_command "$one_pkg"; then
-        echo "Installing $one_pkg..."
-        sudo pacman -S "$one_pkg"
-        if [ $? -eq 0 ]; then
-            echo "$one_pkg are installed."
-        else
-            echo "Install $one_pkg error."
+	is_command $one_pkg
+	installed=$?
+	if [ $installed == 0 ]; then
+            echo "Installing $one_pkg..."
+            sudo pacman -S "$one_pkg"
+            if [ $? -eq 0 ]; then
+                echo "$one_pkg are installed."
+            else
+                echo "Install $one_pkg error."
+            fi
         fi
-    fi
+    done
+}
+
+install_aur_pkg() {
+    for one_pkg in $*
+    do
+	is_command $one_pkg
+	installed=$?
+	if [ $installed == 0 ]; then
+            echo "Installing $one_pkg..."
+            yay -S "$one_pkg"
+            if [ $? -eq 0 ]; then
+                echo "$one_pkg are installed."
+            else
+                echo "Install $one_pkg error."
+            fi
+        fi
     done
 }
 
 
 if [ ${system_type} = "Linux" ]; then
-    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance kitty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl
-
+    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance alacritty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl chrome-gnome-shell 
+    install_aur_pkg qbittorrent-enhanced-git icalingua wechat-uos eudic nutstore-experimental qt5-styleplugins sunlogin
     oh_my_zsh_installer="$shell_home/install_oh_my_zsh.sh"
     chmod +x $oh_my_zsh_installer
     sh $oh_my_zsh_installer
