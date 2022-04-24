@@ -55,13 +55,21 @@ install_aur_pkg() {
 
 
 if [ ${system_type} = "Linux" ]; then
-    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance alacritty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl chrome-gnome-shell 
+    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance alacritty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl chrome-gnome-shell linux-zen linux-zen-headers virtualbox virtualbox-guest-iso virtualbox-ext-oracle 
     install_aur_pkg qbittorrent-enhanced-git icalingua wechat-uos eudic nutstore-experimental qt5-styleplugins sunlogin
+    
     oh_my_zsh_installer="$shell_home/install_oh_my_zsh.sh"
     chmod +x $oh_my_zsh_installer
     sh $oh_my_zsh_installer
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+  
+    sudo systemctl start runsunloginclient.service
+    sudo systemctl enable runsunloginclient.service
+    
+    sudo modprobe vboxdrv
+    sudo modprobe vboxnetadp
+    sudo modprobe vboxnetflt
 fi
 
 
