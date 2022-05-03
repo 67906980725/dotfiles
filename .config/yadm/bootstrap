@@ -3,7 +3,7 @@
 shell_home="$HOME/shell"
 
 declare -A cmd_dict
-cmd_dict=( [neovim]='nvim' [fcitx5-im]='fcitx5' [fcitx5-chinese-addons]='fcitx5' [fcitx5-rime]='fcitx5' [fcitx5-qt]='fcitx5' [fcitx5-gtk]='fcitx5' )
+cmd_dict=( [neovim]='nvim' [fcitx5-im]='fcitx5' [fcitx5-chinese-addons]='fcitx5' [fcitx5-rime]='fcitx5' [fcitx5-qt]='fcitx5' [fcitx5-gtk]='fcitx5' [wl-clipboard]='wl-copy' )
 
 system_type=$(uname -s)
 
@@ -55,8 +55,10 @@ install_aur_pkg() {
 
 
 if [ ${system_type} = "Linux" ]; then
-    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance alacritty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl chrome-gnome-shell linux-zen linux-zen-headers virtualbox virtualbox-guest-iso virtualbox-ext-oracle 
-    install_aur_pkg qbittorrent-enhanced-git icalingua wechat-uos eudic nutstore-experimental qt5-styleplugins sunlogin
+    sudo systemctl stop reflector.service
+    sudo systemctl disable reflector.service
+    install_pkg archlinuxcn-keyring base-devel yay zsh fzf neovim aria2 uget mpv evolution fcitx5-im fcitx5-chinese-addons fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool qt5ct lxappearance alacritty sway waybar otf-font-awesome swayidle swaylock wofi clipman brightnessctl chrome-gnome-shell linux-zen linux-zen-headers virtualbox virtualbox-guest-iso virtualbox-ext-oracle syncthing wl-clipboard python-pyclip 
+    install_aur_pkg qbittorrent-enhanced-git icalingua wechat-uos eudic nutstore-experimental qt5-styleplugins sunloginclient
     
     oh_my_zsh_installer="$shell_home/install_oh_my_zsh.sh"
     chmod +x $oh_my_zsh_installer
@@ -66,7 +68,7 @@ if [ ${system_type} = "Linux" ]; then
   
     sudo systemctl start runsunloginclient.service
     sudo systemctl enable runsunloginclient.service
-    
+    sudo systemctl enable syncthing@${USER}.service
     sudo modprobe vboxdrv
     sudo modprobe vboxnetadp
     sudo modprobe vboxnetflt

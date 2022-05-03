@@ -7,7 +7,7 @@
     "modules-right": ["tray", "pulseaudio", "network", "temperature", "cpu", "memory", "battery", "clock", "custom/germany", "custom/japan"],
     "sway/workspaces": {
         "disable-scroll": true,
-        "disable-click": true,
+        "disable-click": false,
     },
     "tray": {
         "spacing": 10,
@@ -38,9 +38,8 @@
     },
     "network": {
         "interface": "wlan0",
-	"format": "{bandwidthDownBits}",
+	"format": "{bandwidthUpBits} {bandwidthDownBits}",
         "format-wifi-bak": " {essid}",
-        "format-wifi": " 嗖",
         "format-disconnected": "⚠ "
     },
     "pulseaudio": {

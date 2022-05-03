@@ -324,15 +324,12 @@ bar {
 #
 exec --no-startup-id fcitx5 -d
 exec --no-startup-id nutstore -d
-#exec --no-startup-id syncthing
-exec --no-startup-id wechat-uos
-exec --no-startup-id icalingua
+#exec --no-startup-id wechat-uos
+#exec --no-startup-id icalingua
 exec --no-startup-id mako --background-color "#00000080" --border-color "#00000080"
-# exec --no-startup-id balsa
-# exec --no-startup-id copyq 
-# exec --no-startup-id dunst 
 # clipboard sharing
-exec wl-paste -t text --watch clipman store --no-persist
+#exec wl-paste -t text --watch clipman store --no-persist
+exec wl-paste --watch clipman store --no-persist
 
 
 ###end
