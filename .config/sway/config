@@ -234,6 +234,10 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioNext exec playerctl next
     bindsym --locked XF86AudioPrev exec playerctl previous
     bindsym --locked XF86Search exec bemenu-run
+
+    bindsym --locked Ctrl+$mod+$down exec brightnessctl set 2.5%-
+    bindsym --locked Ctrl+$mod+$up exec brightnessctl set 2.5%+
+
 # 
 # use keyboard control nag
 #

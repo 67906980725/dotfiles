@@ -76,6 +76,12 @@ window#waybar {
   animation-direction: alternate;
 }
 
+/*#network {
+  font-size: 10px;
+  padding: 0;
+  margin: 0 7px 0 0;
+  font-weight: bold;
+}*/
 /*#network.disconnected {
   background: #f53c3c;
 }*/
